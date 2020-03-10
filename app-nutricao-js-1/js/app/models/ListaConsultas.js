@@ -3,10 +3,11 @@ class ListaConsultas {
         this._consultas = [];
     }
 
-    adicona(consulta) {
-        this._consultas.push(consulta)
+    adiciona(consulta) {
+        this._consultas.push(consulta);
     }
-    get consulta() {
+
+    get consultas() {
         return [].concat(this._consultas);
     }
 }
