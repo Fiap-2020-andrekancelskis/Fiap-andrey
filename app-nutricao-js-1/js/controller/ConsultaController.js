@@ -5,21 +5,31 @@ class ConsultaController {
         this._inputData = $('#data');
         this._inputPeso = $('#peso');
         this._inputAltura = $('#altura');
+        this._listaConsulta = new ListaConsultas();
     }
     adiciona(evento) {
-        evento.preventDefault();   // criar a classe data helper e passar pra ca chamando ela ja formatada
-        let consulta = new Consulta(
+        evento.preventDefault(); // criar a classe data helper e passar pra ca chamando ela ja formatada
+        let consulta = this._criaConsulta();
+        this._listaConsulta.adicona(consulta);
+        this._limpaFormulario();
+    }
+
+    _criaConsulta() {
+        return new Consulta(
             this._inputNome.value,
             //new Date(this._inputData.value.split('-'));
-            new Date(...
-                this._inputData.value
-                    .split('-')
-                    .map((item, indice) => item - (indice % 2))
-            ),
+            DataHelper.textoParaData(this._inputData.value),
             this._inputPeso.value,
             this._inputAltura.value
         );
 
-        console.log(consulta);
+
+    }
+    _limpaFormulario() {
+        this._inputNome.value = "";
+        this._inputData.value = "";
+        this._inputPeso.value = "";
+        this._inputAltura.value = "";
+        this._inputNome.focus();
     }
 }
